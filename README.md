@@ -22,10 +22,10 @@ ORDER BY ch."name";
 * What are the 100 highest transactions during this time period?
 
 ```sql
-SELECT amount, date
-FROM transactions
-WHERE date >= '2018-01-01 07:00:00' and date <= '2018-12-31 09:00:00'
-ORDER BY amount DESC LIMIT 100;
+SELECT t."amount", t."date"
+FROM transactions as t
+WHERE t."date" >= '2018-01-01 07:00:00' and t."date" <= '2018-12-31 09:00:00'
+ORDER BY t."amount" DESC LIMIT 100;
 ```
 
 * Do you see any fraudulent or anomalous transactions?
@@ -43,10 +43,22 @@ ORDER BY amount DESC LIMIT 100;
 # 3. $2.00 Fraudsters
 ## Some fraudsters hack a credit card by making several small payments (generally less than $2.00), which are typically ignored by cardholders. Count the transactions that are less than $2.00 per cardholder. 
 
+```sql
+SELECT ch.name, COUNT(t.t_id) AS Less_$2, t.t_card
+FROM transactions as t 
+JOIN credit_card as cc on t.t_card = cc.cc_card
+JOIN card_holder as ch on cc.id_card_holder = ch.ch_id
+WHERE t.amount<2
+GROUP BY t.t_card,ch.name
+ORDER BY Less_$2 DESC;
+```
+
 ### A.) Is there any evidence to suggest that a credit card has been hacked? Explain your rationale.
 
 ```
+No. Card holder Megan Price has the highest amount of transactions less than $2 at 13. Card holders transactions less than $2 are relatively low compared to card holders total transactions.
 
+(remove "WHERE t.amount<2" to compare total card holders transactions)
 ```
 
 # 4. Top 5  
@@ -54,7 +66,13 @@ ORDER BY amount DESC LIMIT 100;
 ### A.) What are the top five merchants prone to being hacked using small transactions?
 
 ```
-
+SELECT m.name, mc.name, COUNT(t.t_id)
+FROM transactions as t
+JOIN merchant as m on m.m_id = t.id_merchant
+JOIN merchant_category as mc on mc.mc_id = m.id_merchant_category
+WHERE t.amount<2
+GROUP BY m.name, mc.name
+ORDER BY COUNT(t.t_id) DESC LIMIT 5;
 ```
 
 #### B.) Once you have a query that can be reused, create a view for each of the previous queries.
