@@ -56,9 +56,11 @@ ORDER BY Less_$2 DESC;
 ### A.) Is there any evidence to suggest that a credit card has been hacked? Explain your rationale.
 
 ```
-No. Card holder Megan Price has the highest amount of transactions less than $2 at 13. Card holders transactions less than $2 are relatively low compared to card holders total transactions.
+No. Largest transactions less than $2 is 13. 
+Card holders transactions less than $2 are relatively 
+low compared to total card holders transactions.
 
-(remove "WHERE t.amount<2" to compare total card holders transactions)
+(remove "WHERE t.amount<2" to view total card holders transactions)
 ```
 
 # 4. Top 5  
@@ -77,8 +79,19 @@ ORDER BY COUNT(t.t_id) DESC LIMIT 5;
 
 #### B.) Once you have a query that can be reused, create a view for each of the previous queries.
 
-```
+```sql
+CREATE VIEW transactiondetails AS
+SELECT t.t_id,t.date,t.amount,m.name AS merchantname,
+        mc.name AS merchantcategory,
+		cc.cc_card,
+		ch.name AS cardholdername
+FROM transactions t
+INNER JOIN credit_card AS cc ON t.t_card = cc.cc_card
+INNER JOIN card_holder AS ch ON ch.ch_id = cc.id_card_holder
+INNER JOIN merchant AS m ON m.m_id = t.t_id
+INNER JOIN merchant_category AS mc ON mc.mc_id = m.id_merchant_category;
 
+SELECT * FROM transactiondetails
 ```
 
 # 5. Top customers fraudulent transactions
