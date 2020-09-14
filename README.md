@@ -86,14 +86,18 @@ ORDER BY COUNT(t.t_id) DESC LIMIT 5;
 #### A.) Verify if there are any fraudulent transactions in the history of two of the most important customers of the firm. For privacy reasons, you only know that their cardholders' IDs are 18 and 2.
 * Using hvPlot, create a line plot representing the time series of transactions over the course of the year for each cardholder. In order to compare the patterns of both cardholders, create a line plot containing both lines.
 
-```
-![]()
-```
+![Card Holder 2](Images/card_holder_2_amounts.png)
+![Card Holder 18](Images/card_holder_18_amounts.png)
+![Both Card Holders](Images/card_holder_both_amounts.png)
 
 * What difference do you observe between the consumption patterns? Does the difference suggest a fraudulent transaction? Explain your rationale.
 
 ```
-
+Typical transactions are less than $20. 
+Card holder 18 has two abnormal transactions. 
+9-2-2018 $2001.00
+11-17-2018 $1769.00
+These 2 transactions suggest fraud. 
 ```
 
 # 6. Q1 2018 Anomalous transactions
