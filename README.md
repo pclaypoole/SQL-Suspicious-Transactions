@@ -67,7 +67,7 @@ low compared to total card holders transactions.
 
 ### A.) What are the top five merchants prone to being hacked using small transactions?
 
-```
+```sql
 SELECT m.name, mc.name, COUNT(t.t_id)
 FROM transactions as t
 JOIN merchant as m on m.m_id = t.id_merchant
