@@ -9,23 +9,23 @@ Create an entity relationship diagram (ERD) by inspecting the provided CSV files
 ### A.) How can you isolate (or group) the transactions of each cardholder?
 
 ```sql
-SELECT ch."name",cc."cc_card",t."amount",t."date",m."name",mc."name" 
-FROM "transactions" AS t
-INNER JOIN "credit_card" AS cc ON t."id_merchant" = cc."id_card_holder"
-INNER JOIN "card_holder" AS ch ON cc."id_card_holder" = ch."ch_id"
-INNER JOIN "merchant" AS m ON t."id_merchant" = m."m_id"
-INNER JOIN "merchant_category" AS mc ON mc."mc_id" = m."id_merchant_category"
-ORDER BY ch."name";
+SELECT ch.name,cc.cc_card,t.amount,t.date,m.name,mc.name
+FROM transactions AS t
+INNER JOIN credit_card AS cc ON t.id_merchant = cc.id_card_holder
+INNER JOIN card_holder AS ch ON cc.id_card_holder = ch.ch_id
+INNER JOIN merchant AS m ON t.id_merchant = m.m_id
+INNER JOIN merchant_category AS mc ON mc.mc_id = m.id_merchant_category
+ORDER BY ch.name;
 ```
 
 ### B.) Consider the time period 7:00 a.m. to 9:00 a.m. 
 * What are the 100 highest transactions during this time period?
 
 ```sql
-SELECT t."amount", t."date"
+SELECT t.amount, t.date
 FROM transactions as t
-WHERE t."date" >= '2018-01-01 07:00:00' and t."date" <= '2018-12-31 09:00:00'
-ORDER BY t."amount" DESC LIMIT 100;
+WHERE t.date >= '2018-01-01 07:00:00' and t.date <= '2018-12-31 09:00:00'
+ORDER BY t.amount DESC LIMIT 100;
 ```
 
 * Do you see any fraudulent or anomalous transactions?
