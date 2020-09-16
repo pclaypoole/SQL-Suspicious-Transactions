@@ -22,7 +22,7 @@ ORDER BY ch.name;
 * What are the 100 highest transactions during this time period?
 
 ```sql
-SELECT t.amount, t.date
+SELECT t.amount, t.date 
 FROM transactions as t
 WHERE t.date >= '2018-01-01 07:00:00' and t.date <= '2018-12-31 09:00:00'
 ORDER BY t.amount DESC LIMIT 100;
@@ -31,13 +31,13 @@ ORDER BY t.amount DESC LIMIT 100;
 * Do you see any fraudulent or anomalous transactions?
 
 ```
-
+Yes.
 ```
 
 * If you answered yes to the previous question, explain why you think there might be fraudulent transactions during this time frame.
 
 ```
-
+Based on the large sizes of the transactions we see potential fraud early in the morning from 7am-9am. 
 ```
 
 # 3. $2.00 Fraudsters
