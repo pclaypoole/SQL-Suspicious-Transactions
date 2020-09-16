@@ -116,12 +116,10 @@ These 2 transactions suggest fraud.
 # 6. Q1 2018 Anomalous transactions
 * Using Plotly Express, create a series of six box plots, one for each month, in order to identify how many outliers there are per month for cardholder ID 25.
 
-```
-
-```
+![Six Box Plots](Images/six_box_plots.png)
 
 * Do you notice any anomalies? Describe your observations and conclusions.
 
 ```
-
+No anomalies. However, notice that the card holder 25 did not transact in Jan. and March - April. 
 ```
