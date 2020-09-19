@@ -18,6 +18,8 @@ INNER JOIN merchant_category AS mc ON mc.mc_id = m.id_merchant_category
 ORDER BY ch.name;
 ```
 
+![isolate](Images/card_holder.png)
+
 ### B.) Consider the time period 7:00 a.m. to 9:00 a.m. 
 * What are the 100 highest transactions during this time period?
 
@@ -27,6 +29,7 @@ FROM transactions as t
 WHERE t.date >= '2018-01-01 07:00:00' and t.date <= '2018-12-31 09:00:00'
 ORDER BY t.amount DESC LIMIT 100;
 ```
+![Between 7am-9am](Images/7-9am.png)
 
 * Do you see any fraudulent or anomalous transactions?
 
@@ -52,6 +55,7 @@ WHERE t.amount<2
 GROUP BY t.t_card,ch.name
 ORDER BY Less_$2 DESC;
 ```
+![Less than $2](Images/less_$2_transactions.png)
 
 ### A.) Is there any evidence to suggest that a credit card has been hacked? Explain your rationale.
 
@@ -76,6 +80,7 @@ WHERE t.amount<2
 GROUP BY m.name, mc.name
 ORDER BY COUNT(t.t_id) DESC LIMIT 5;
 ```
+![Top 5](Images/t_id_count.png)
 
 #### B.) Once you have a query that can be reused, create a view for each of the previous queries.
 
@@ -93,6 +98,7 @@ INNER JOIN merchant_category AS mc ON mc.mc_id = m.id_merchant_category;
 
 SELECT * FROM transactiondetails
 ```
+![TransactionDetails](Images/transaction_details.png)
 
 # 5. Top customers fraudulent transactions
 
